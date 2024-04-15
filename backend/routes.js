@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getConnectionStatus } = require('./db');
+const { getConnectionStatus } = require('../db');
 
 router.use(express.json());
 
