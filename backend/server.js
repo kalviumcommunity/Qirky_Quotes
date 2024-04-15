@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const app_routes = require('./routes')
 
 const{startDatabase}=require('./db')
+app.use('cors')
 
 
 
