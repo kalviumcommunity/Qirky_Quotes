@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const app_routes = require('./routes')
 
-const{startDatabase}=require('../db')
+const{startDatabase}=require('./db')
 
 
 

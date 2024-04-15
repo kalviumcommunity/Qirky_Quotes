@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { getConnectionStatus } = require('../db');
+const { getConnectionStatus } = require('./db');
+const quoteModel = require('./schema')
 
 router.use(express.json());
 
@@ -40,5 +41,16 @@ router.put('/put', async (req, res, next) => {
 router.delete('/delete', async (req, res) => {
     res.send('Data deleted successfully');
 });
+
+router.get('/data',async(req,res)=>{
+    try {
+        const data = await quoteModel.find({})
+        res.status(200).json({data})
+    } catch (error) {
+        console.log(error)
+        res.status(500).send('error fetching data')
+        
+    }
+})
 
 module.exports = router;
