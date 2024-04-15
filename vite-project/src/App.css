@@ -1,42 +1,61 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* App.css */
+
+/* Navbar */
+.navbar {
+  background-color: #292f36; /* Dark background color */
+  padding: 10px 20px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.navbar-brand {
+  color: #fff; /* White text color */
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase; /* Uppercase text */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Main content */
+.main-content {
+  padding: 40px 20px; /* Increased padding */
+  background-color: #f5deb3; /* Wheat background color */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Quote items */
+.quote-item {
+  position: relative; /* Set position to relative for child positioning */
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Center content vertically */
+  background-color: #fff; /* White background color */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  padding: 20px;
+  transition: box-shadow 0.3s; /* Smooth shadow transition */
+  margin-bottom: 20px; /* Add space between tiles */
 }
 
-.card {
-  padding: 2em;
+.quote-item:hover {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1); /* Increased shadow on hover */
 }
 
-.read-the-docs {
-  color: #888;
+/* Quote image */
+.quote-item img {
+  width: 200px; /* Set width to 200px */
+  height: 250px; /* Set height to 250px */
+  border-radius: 4px; /* Rounded image corners */
+  margin-right: 20px; /* Spacing between image and quote */
+  object-fit: cover; /* Ensure images maintain aspect ratio */
+}
+
+/* Quote text */
+.quote-item blockquote {
+  margin: 0;
+  font-size: 1.2rem; /* Adjust quote text size */
+  text-align: center; /* Center quote text */
+  font-style: italic; /* Italicized text */
+  color: #333; /* Dark text color */
+}
+
+/* Author */
+.quote-item footer {
+  margin-top: 10px; /* Spacing above author */
+  font-weight: bold;
 }
