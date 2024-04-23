@@ -53,4 +53,15 @@ router.get('/data',async(req,res)=>{
     }
 })
 
+router.post('/add', async (req, res) => {
+    try {
+        console.log(req.body)
+        const newData = await quoteModel.create(req.body);
+        console.log(newData)
+        res.send(newData);
+    } catch (error) {
+        console.error(error);
+        res.send('Error');
+    }
+});
 module.exports = router;
