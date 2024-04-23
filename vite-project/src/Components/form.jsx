@@ -1,122 +1,48 @@
-import { useState } from 'react'
-import '../App.css'
+import { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-function App() {
+function Form({ onNewForm }) {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-  })
-  const [alerts, setAlerts] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-  })
-  const [FocusState, setFocusState] = useState({
-    firstName: false,
-    lastName: false,
-    email: false,
-    phoneNumber: false,
-  })
+    ranking: 0,
+    quote: '',
+    image: '',
+    author: '',
+  });
 
-  const [registrationSuccess, setRegistrationSuccess] = useState(false)
+  const navigate = useNavigate();
 
-  const handleChange = (e) =>{
-    const{name,value}= e.target;
-    setFormData((prevData) => ({...prevData,[name]:value}) )
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
-  const handleFocus = (name)=>{
-    setFocusState((prevfocusState)=>({...prevfocusState,[name]: true}))
 
-  }
-
-  const handleSubmit = (e)=>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const newAlerts = {};
-
-    if(formData.firstName === ''){
-      newAlerts.firstName = 'please enter your first name.';
-
+    try {
+      const response = await axios.post('https://s55-educate-3.onrender.com/add', formData);
+      console.log(response);
+      navigate('/');
+    } catch (error) {
+      console.log('Error adding quote:', error);
     }
-    else{
-      newAlerts.firstName ='';
-    }
+  };
 
-    if(formData.lastName === ''){
-      newAlerts.lastName = 'please enter your last name.';
-
-    }
-    else{
-      newAlerts.lastName ='';
-    }
-
-    if(formData.phoneNumber === ''){
-      newAlerts.phoneNumber = 'please enter your phone number.';
-
-    }
-    else{
-      newAlerts.phoneNumber ='';
-    }
-
-    if(formData.email === ''){
-      newAlerts.email = 'please enter your email.';
-
-    }
-    else{
-      newAlerts.email ='';
-    }
-
-    setAlerts(newAlerts)
-
-    if(
-      newAlerts.firstName === '' && newAlerts.lastName === '' && newAlerts.phoneNumber ==='' && newAlerts.email===''
-    ){
-      setRegistrationSuccess(true)
-    }
-    
-  }
   return (
-    <>
-      <div className="App">
-        {registrationSuccess && (
-          <div style={{marginLeft:'25.5vw',width: '40%',backgroundColor: 'blue', color:'white',padding:'10px',marginTop:'10px',borderRadius:'8px',textAlign:'center'}}>
-            Registration Successfull !
-          </div>
-        )}
-        <form onSubmit={handleSubmit}>
-          <label>
-            <input type='text' name="firstName" value={formData.firstName} onChange={handleChange} placeholder="Enter your firts name" onFocus={() => handleFocus('firstName')} style={{ borderColor: FocusState.firstName ? 'navy' : '#ccc' }} />
-            <div className="alert">{alerts.firstName}</div>
-          </label>
-          <br />
-          {/* For last name  */}
-          <label>
-            <input type='text' name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Enter your last name" onFocus={() => handleFocus('lastName')} style={{ borderColor: FocusState.lastName ? 'navy' : '#ccc' }} />
-            <div className="alert">{alerts.lastName}</div>
-          </label>
-          <br />
-          {/* For email */}
-          <label>
-            <input type='email' name="email" value={formData.email} onChange={handleChange} placeholder="Enter your email" onFocus={() => handleFocus('email')} style={{ borderColor: FocusState.email ? 'navy' : '#ccc' }} />
-            <div className="alert">{alerts.email}</div>
-          </label>
-          <br />
-          {/* For phone number */}
-          <label>
-            <input type='tel' name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} placeholder="Enter your phoneNumber" onFocus={() => handleFocus('phoneNumber')} style={{ borderColor: FocusState.phoneNumber ? 'navy' : '#ccc' }} />
-            <div className="alert">{alerts.phoneNumber}</div>
-          </label>
-          <br />
-          {/* submit button  */}
-          <button type='submit' style={{width:'10vw',marginTop:'2vw',borderRadius:'2px', backgroundColor: 'green', color: 'white', padding: '10px', border: 'none', cursor: 'pointer' }}>Register</button>
-        </form>
-      </div>
-    </>
-  )
-
+    <div className="entity-form-container">
+      <h1><b>Add New Quote</b></h1>
+      <form onSubmit={handleSubmit}>
+        <input type="number" name="ranking" placeholder="Ranking" value={formData.ranking} onChange={handleChange} />
+        <input type="text" name="quote" placeholder="Quote" value={formData.quote} onChange={handleChange} />
+        <input type="text" name="image" placeholder="Image URL" value={formData.image} onChange={handleChange} />
+        <input type="text" name="author" placeholder="Author" value={formData.author} onChange={handleChange} />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
 }
 
-export default App
+export default Form;

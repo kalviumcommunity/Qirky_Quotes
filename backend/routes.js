@@ -52,15 +52,18 @@ router.get('/data',async(req,res)=>{
         
     }
 })
-
-router.post('/add', validateEntity, async (req, res) => {
+//changed
+router.post('/add', async (req, res) => {
     try {
-        const newEntity = await Entity.create(req.body);
-        res.status(201).json(newEntity);
-    } catch (err) {
-        console.error('Error adding entity:', err);
-        res.status(500).json({ error: 'Internal Server Error' });
+        console.log(req.body)
+        const newData = await quoteModel.create(req.body);
+        console.log(newData)
+        res.send(newData);
+    } catch (error) {
+        console.error(error);
+        res.send('Error');
     }
-});
 
+    
+});
 module.exports = router;
