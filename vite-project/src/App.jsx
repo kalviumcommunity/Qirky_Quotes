@@ -1,8 +1,8 @@
-// App.jsx
-
 import React from 'react';
-import './App.css'; // Import your CSS file for styling
+import { Route, Link, Routes} from 'react-router-dom';
+import './App.css'; 
 import Home from './Components/Home';
+import Form from './Components/form'; 
 
 function App() {
   // Mock data for most quirky quotes with predefined ratings
@@ -13,21 +13,27 @@ function App() {
   ];
 
   return (
-    <div className="App">
-      {/* Navbar */}
-      <nav className="navbar">
-        <div className="navbar-brand">Quirky Quotes</div>
-        <ul className="navbar-nav">
-          
-          
-          
-        </ul>
-      </nav>
+    
+      <div className="App">
+        {/* Navbar */}
+        <nav className="navbar">
+          <div className="navbar-brand">Quirky Quotes</div>
+          <ul className="navbar-nav">
+            {/* Add a button to navigate to the Form */}
+            <li>
+              <Link to="/form">Go to Form</Link>
+            </li>
+          </ul>
+        </nav>
 
-      {/* Main content */}
-      <Home/>
-     
-    </div>
+        {/* Main content */}
+        <Routes>
+          <Route path='/' element={<Home/>} />
+        <Route path="/form" element={<Form/>} />
+
+        </Routes>
+      </div>
+    
   );
 }
 
