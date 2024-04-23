@@ -2,6 +2,7 @@
 
 import React from 'react';
 import './App.css'; // Import your CSS file for styling
+import Home from './Components/Home';
 
 function App() {
   // Mock data for most quirky quotes with predefined ratings
@@ -24,23 +25,8 @@ function App() {
       </nav>
 
       {/* Main content */}
-      <div className="main-content">
-        {/* Display most quirky quotes */}
-        <div className="quote-list">
-          <h2>Most Quirky Quotes:</h2>
-          {quotes.map((quote, index) => (
-            <div key={index} className="quote-item">
-              <img src={quote.image} alt={quote.author} />
-              <blockquote>
-                <p>{quote.text}</p>
-                <footer>- {quote.author}</footer>
-                {/* Display current rating */}
-                <div className="current-rating">Rating: {quote.rating}</div>
-              </blockquote>
-            </div>
-          ))}
-        </div>
-      </div>
+      <Home/>
+     
     </div>
   );
 }
