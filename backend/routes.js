@@ -52,7 +52,7 @@ router.get('/data',async(req,res)=>{
         
     }
 })
-
+//changed
 router.post('/add', async (req, res) => {
     try {
         console.log(req.body)
