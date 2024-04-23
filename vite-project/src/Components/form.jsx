@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import './Quotes.css';
 import { useNavigate } from 'react-router-dom';
 
 function Form({ onNewForm }) {
@@ -23,7 +24,7 @@ function Form({ onNewForm }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://s55-educate-3.onrender.com/add', formData);
+      const response = await axios.post('https://qirky-quotes-2.onrender.com/add', formData);
       console.log(response);
       navigate('/');
     } catch (error) {
