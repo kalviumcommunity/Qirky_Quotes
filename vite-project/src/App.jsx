@@ -3,6 +3,7 @@ import { Route, Link, Routes} from 'react-router-dom';
 import './App.css'; 
 import Home from './Components/Home';
 import Form from './Components/form'; 
+import UpdateQuotes from './Components/UpdateQuotes';
 
 function App() {
   // Mock data for most quirky quotes with predefined ratings
@@ -30,6 +31,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>} />
         <Route path="/form" element={<Form/>} />
+        <Route path="/update/:id" element={<UpdateQuotes />} />
 
         </Routes>
       </div>
