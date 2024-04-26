@@ -1,31 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom'; 
 
 function Home() {
     const [quoteData, setQuoteData] = useState([]);
 
     const fetchData = async () => {
-        console.log("fetchingf")
         try {
             const response = await axios.get('https://qirky-quotes-2.onrender.com/data');
             setQuoteData(response.data.data);
-            console.log(response.data.data);
         } catch (error) {
             console.error(error);
         }
     };
+
     useEffect(() => {
         fetchData();
     }, []);
 
-    useEffect(()=>{
-        console.log("QD IS",quoteData)
-    },[quoteData])
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete(`https://qirky-quotes-2.onrender.com/delete/${id}`); 
+            setQuoteData(prevQuotes => prevQuotes.filter(quote => quote._id !== id));
+        } catch (error) {
+            console.log('Error deleting quote:', error);
+        }
+    };
 
     return (
         <div>
             <div className="main-content">
-                {/* Display most quirky quotes */}
                 <div className="quote-list">
                     <h2>Most Quirky Quotes:</h2>
                     {quoteData && quoteData.map((quote, index) => (
@@ -33,8 +37,15 @@ function Home() {
                             <img src={quote.image} alt={quote.image} />
                             <blockquote>    
                                 <p>{quote.quote}</p>
+                                <div className="button-group">
+                                  
+                                    <button onClick={() => handleDelete(quote._id)}>Delete</button>
+                                    
+                                    <Link to={`/updatequote/${quote._id}`}> 
+                                        <button style={{ backgroundColor: '#085450' }}>Update</button>
+                                    </Link>
+                                </div>
                                 <footer>- {quote.author}</footer>
-                                {/* Display current rating */}
                                 <div className="current-rating">Rating: {quote.ranking}</div>
                             </blockquote>
                         </div>
@@ -43,8 +54,6 @@ function Home() {
             </div>
         </div>
     );
-
-    
 }
 
 export default Home;
