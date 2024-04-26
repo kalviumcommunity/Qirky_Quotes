@@ -20,7 +20,7 @@ function Home() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`https://qirky-quotes-2.onrender.com/delete/${id}`); 
+            await axios.delete(`http://localhost:3000/delete/${id}`);
             setQuoteData(prevQuotes => prevQuotes.filter(quote => quote._id !== id));
         } catch (error) {
             console.log('Error deleting quote:', error);
@@ -41,7 +41,7 @@ function Home() {
                                   
                                     <button onClick={() => handleDelete(quote._id)}>Delete</button>
                                     
-                                    <Link to={`/updatequote/${quote._id}`}> 
+                                    <Link to={`/update/${quote._id}`}> 
                                         <button style={{ backgroundColor: '#085450' }}>Update</button>
                                     </Link>
                                 </div>

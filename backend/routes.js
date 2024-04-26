@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { getConnectionStatus } = require('./db');
 const quoteModel = require('./schema')
+const mongoose = require('mongoose')
 
 router.use(express.json());
 
@@ -52,6 +53,18 @@ router.get('/data',async(req,res)=>{
         
     }
 })
+
+router.get('/data/:id',async(req,res)=>{
+    const {id} = req.params
+    try {
+        const data = await quoteModel.findById(id)
+        res.status(200).json(data)
+    } catch (error) {
+        console.log(error)
+        res.status(500).send('error fetching data')
+        
+    }
+})
 //changed
 router.post('/add', async (req, res) => {
     try {
@@ -67,8 +80,9 @@ router.post('/add', async (req, res) => {
     
 });
 router.put('/update/:id', async (req, res) => {
+    const {id} = req.params
     try {
-        const updatedEntity = await Entity.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const updatedEntity = await quoteModel.findByIdAndUpdate({_id : id},req.body);
         res.json(updatedEntity);
     } catch (err) {
         console.error('Error updating entity:', err);
@@ -77,12 +91,15 @@ router.put('/update/:id', async (req, res) => {
 });
 
 router.delete('/delete/:id', async (req, res) => {
+    const {id} = req.params
+    console.log("id is",id)
     try {
-        await Entity.findByIdAndDelete(req.params.id);
-        res.status(204).end();
+        await quoteModel.findByIdAndDelete(id);
+        res.status(200).json("deleted")
     } catch (err) {
         console.error('Error deleting entity:', err);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
 module.exports = router;
