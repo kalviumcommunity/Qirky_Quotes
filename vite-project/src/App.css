@@ -1,59 +1,53 @@
-
 .navbar {
-  background-color: #292f36; /* Dark background color */
+  background-color: #292f36;
   padding: 10px 20px;
 }
 
 .navbar-brand {
-  color: #fff; /* White text color */
+  color: #fff;
   font-size: 1.5rem;
   font-weight: bold;
-  text-transform: uppercase; /* Uppercase text */
+  text-transform: uppercase;
 }
 
-/* Main content */
 .main-content {
-  padding: 40px 20px; /* Increased padding */
-  background-color: #f5deb3; /* Wheat background color */
+  padding: 40px 20px;
+  background-color: #f5deb3;
 }
 
-/* Quote items */
 .quote-item {
-  position: relative; /* Set position to relative for child positioning */
-  display: flex; /* Use flexbox for layout */
-  align-items: center; /* Center content vertically */
-  background-color: #e8dddd; /* White background color */
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: #e8dddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  transition: box-shadow 0.3s; /* Smooth shadow transition */
-  margin-bottom: 20px; /* Add space between tiles */
+  transition: box-shadow 0.3s;
+  margin-bottom: 20px;
 }
 
 .quote-item:hover {
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1); /* Increased shadow on hover */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Quote image */
 .quote-item img {
-  width: 200px; /* Set width to 200px */
-  height: 250px; /* Set height to 250px */
-  border-radius: 4px; /* Rounded image corners */
-  margin-right: 20px; /* Spacing between image and quote */
-  object-fit: cover; /* Ensure images maintain aspect ratio */
+  width: 200px;
+  height: 250px;
+  border-radius: 4px;
+  margin-right: 20px;
+  object-fit: cover;
 }
 
-/* Quote text */
 .quote-item blockquote {
   margin: 0;
-  font-size: 1.2rem; /* Adjust quote text size */
-  text-align: center; /* Center quote text */
-  font-style: italic; /* Italicized text */
-  color: #333; /* Dark text color */
+  font-size: 1.2rem;
+  text-align: center;
+  font-style: italic;
+  color: #333;
 }
 
-/* Author */
 .quote-item footer {
-  margin-top: 10px; /* Spacing above author */
+  margin-top: 10px;
   font-weight: bold;
 }
