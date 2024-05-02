@@ -12,7 +12,7 @@ function UpdateQuotes() {
   });
   const navigate = useNavigate();
 
-  const [userData,setUserData] = useState([])
+  const [userData, setUserData] = useState([])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,25 +22,36 @@ function UpdateQuotes() {
     }));
   };
 
-  const getData = async() => {
-    const res = await axios.get(`http://localhost:3000/data/${id}`)
-      .then(res => {
-        console.log("id",res.data.data)
-        setUserData(res.data.data)
-        setQuote(res.data.data)
-      })
-      .catch(err => console.log(err))
-  }
+  const getData = async () => {
+    try {
+      const res = await axios.get(`http://localhost:3000/data/${id}`);
+      const responseData = res.data.data;
+      console.log('Retrieved data:', responseData);
+      setUserData(responseData);
+      console.log('ho',userData)
+      setQuote({
+        ranking: responseData.ranking,
+        quote: responseData.quote,
+        image: responseData.image,
+        author: responseData.author
+      });
+    } catch (error) {
+      console.log('Error fetching quote data:', error);
+    }
+  };
+  
 
-  useEffect(()=>{
+
+  useEffect(() => {
     getData()
-  },[id])
+  }, [id])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.put(`http://localhost:3000/update/${id}`, quote);
       navigate('/'); // Redirect to home page after successful update
+      console.log(quote,'youuu')
     } catch (error) {
       console.log('Error updating quote:', error);
     }

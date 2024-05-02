@@ -42,7 +42,7 @@ function Home() {
                                     <button onClick={() => handleDelete(quote._id)}>Delete</button>
                                     
                                     <Link to={`/update/${quote._id}`}> 
-                                        <button style={{ backgroundColor: '#085450' }}>Update</button>
+                                        <button style={{ backgroundColor: '#085450' }} onClick={()=>console.log(quote.d)}>Update</button>
                                     </Link>
                                 </div>
                                 <footer>- {quote.author}</footer>
