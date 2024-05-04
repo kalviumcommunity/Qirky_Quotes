@@ -1,12 +1,23 @@
 const mongoose = require('mongoose');
 
-const quoteSchema = mongoose.Schema({
-    ranking:Number,
-    quote:String,
-    image:String,
-    author:String
+// Schema for the Quote entity
+const quoteSchema = new mongoose.Schema({
+    ranking: {
+        type: Number,
+        required: true
+    },
+    quote: {
+        type: String,
+        required: true
+    },
+    image: String,
+    author: {
+        type: String,
+        required: true
+    }
+});
 
-})
+// Model based on the schema
+const Quote = mongoose.model('Quote', quoteSchema);
 
-const quoteModel = mongoose.model('quotes',quoteSchema)
-module.exports=quoteModel;
+module.exports = Quote;
