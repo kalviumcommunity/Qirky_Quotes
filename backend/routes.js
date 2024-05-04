@@ -1,10 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const { getConnectionStatus } = require('./db');
-const quoteModel = require('./schema')
-const mongoose = require('mongoose')
+const Quote = require('./schema');
+const Joi = require('joi');
 
 router.use(express.json());
+
+// Joi schema for validating quote data
+const quoteSchema = Joi.object({
+    ranking: Joi.number().required(),
+    quote: Joi.string().required(),
+    image: Joi.string(),
+    author: Joi.string().required()
+});
 
 router.use((err, req, res, next) => {
     console.error(err.stack);
@@ -45,7 +53,7 @@ router.delete('/delete', async (req, res) => {
 
 router.get('/data',async(req,res)=>{
     try {
-        const data = await quoteModel.find({})
+        const data = await Quote.find({})
         res.status(200).json({data})
     } catch (error) {
         console.log(error)
@@ -57,7 +65,7 @@ router.get('/data',async(req,res)=>{
 router.get('/data/:id',async(req,res)=>{
     const {id} = req.params
     try {
-        const data = await quoteModel.findById(id)
+        const data = await Quote.findById(id)
         res.status(200).json(data)
     } catch (error) {
         console.log(error)
@@ -65,24 +73,35 @@ router.get('/data/:id',async(req,res)=>{
         
     }
 })
-//changed
+
 router.post('/add', async (req, res) => {
     try {
-        console.log(req.body)
-        const newData = await quoteModel.create(req.body);
-        console.log(newData)
+        // Validate request body
+        const { error } = quoteSchema.validate(req.body);
+        if (error) {
+            return res.status(400).json({ error: error.details[0].message });
+        }
+
+        console.log(req.body);
+        const newData = await Quote.create(req.body);
+        console.log(newData);
         res.send(newData);
     } catch (error) {
         console.error(error);
         res.send('Error');
     }
-
-    
 });
+
 router.put('/update/:id', async (req, res) => {
     const {id} = req.params
     try {
-        const updatedEntity = await quoteModel.findByIdAndUpdate({_id : id},req.body);
+        // Validate request body
+        const { error } = quoteSchema.validate(req.body);
+        if (error) {
+            return res.status(400).json({ error: error.details[0].message });
+        }
+
+        const updatedEntity = await Quote.findByIdAndUpdate({_id : id},req.body);
         res.json(updatedEntity);
     } catch (err) {
         console.error('Error updating entity:', err);
@@ -94,8 +113,8 @@ router.delete('/delete/:id', async (req, res) => {
     const {id} = req.params
     console.log("id is",id)
     try {
-        await quoteModel.findByIdAndDelete(id);
-        res.status(200).json("deleted")
+        const deletedEntity = await Quote.findByIdAndDelete(id);
+        res.status(200).json(deletedEntity);
     } catch (err) {
         console.error('Error deleting entity:', err);
         res.status(500).json({ error: 'Internal Server Error' });
