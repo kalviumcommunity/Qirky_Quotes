@@ -26,7 +26,7 @@ function Form({ onNewForm }) {
     e.preventDefault();
     try {
       const response = await axios.post('https://qirky-quotes-2.onrender.com/add', formData);
-      console.log(response);
+      console.log(formData);
       navigate('/');
     } catch (error) {
       console.log('Error adding quote:', error);

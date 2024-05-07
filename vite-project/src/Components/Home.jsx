@@ -5,11 +5,21 @@ import { Link } from 'react-router-dom';
 function Home() {
     const [quoteData, setQuoteData] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [selectedUser, setSelectedUser] = useState("All");
+    const [uniqueUsers, setUniqueUsers] = useState(["All"]);
 
     const fetchData = async () => {
         try {
             const response = await axios.get('https://qirky-quotes-2.onrender.com/data');
             setQuoteData(response.data.data);
+
+            const users = [
+              "All",
+              ...new Set(
+                response.data.data.map((quote) => quote.created_by).filter(Boolean)
+              ),
+            ];
+            setUniqueUsers(users);
         } catch (error) {
             console.error(error);
         }
@@ -35,6 +45,10 @@ function Home() {
         setIsLoggedIn(false);
     };
 
+    const filteredQuotesByUser = quoteData.filter(
+        (quote) => selectedUser === "All" || quote.created_by === selectedUser
+    );
+
     return (
         <div>
             <div className="main-content">
@@ -56,9 +70,25 @@ function Home() {
                         </Link>
                     </div>
                 )}
+
+                {isLoggedIn && (
+                    <div className="dropdown-container">
+                      <select
+                        onChange={(e) => setSelectedUser(e.target.value)}
+                        value={selectedUser}
+                      >
+                        {uniqueUsers.map((user) => (
+                          <option key={user} value={user}>
+                            {user}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                )}
+
                 <div className="quote-list">
                     <h2>Most Quirky Quotes:</h2>
-                    {quoteData && quoteData.map((quote, index) => (
+                    {filteredQuotesByUser.map((quote, index) => (
                         <div key={index} className="quote-item">
                             <img src={quote.image} alt={quote.image} />
                             <blockquote>    
