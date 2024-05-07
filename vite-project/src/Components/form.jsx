@@ -9,6 +9,7 @@ function Form({ onNewForm }) {
     quote: '',
     image: '',
     author: '',
+    created_by: sessionStorage.getItem('username')
   });
 
   const navigate = useNavigate();

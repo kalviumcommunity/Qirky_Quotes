@@ -11,7 +11,8 @@ const quoteSchema = Joi.object({
     ranking: Joi.number().required(),
     quote: Joi.string().required(),
     image: Joi.string(),
-    author: Joi.string().required()
+    author: Joi.string().required(),
+    created_by: Joi.string().required()
 });
 
 router.use((err, req, res, next) => {
