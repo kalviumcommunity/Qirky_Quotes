@@ -4,6 +4,11 @@ import './App.css';
 import Home from './Components/Home';
 import Form from './Components/form'; 
 import UpdateQuotes from './Components/UpdateQuotes';
+import Signup  from './Components/Signup';
+import Login from './Components/Login'
+
+
+
 
 function App() {
   // Mock data for most quirky quotes with predefined ratings
@@ -21,9 +26,6 @@ function App() {
           <div className="navbar-brand">Quirky Quotes</div>
           <ul className="navbar-nav">
             {/* Add a button to navigate to the Form */}
-            <li>
-              <Link to="/form">Go to Form</Link>
-            </li>
           </ul>
         </nav>
 
@@ -32,6 +34,8 @@ function App() {
           <Route path='/' element={<Home/>} />
         <Route path="/form" element={<Form/>} />
         <Route path="/update/:id" element={<UpdateQuotes />} />
+        <Route path="/signup" element={<Signup/>} />
+        <Route path="/login" element={<Login/>} />
 
         </Routes>
       </div>

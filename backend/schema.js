@@ -14,7 +14,8 @@ const quoteSchema = new mongoose.Schema({
     author: {
         type: String,
         required: true
-    }
+    },
+    created_by: String
 });
 
 // Model based on the schema
