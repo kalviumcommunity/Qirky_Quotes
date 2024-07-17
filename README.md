@@ -6,4 +6,10 @@ discription :The Quirky Quote Collection website is a platform where users can d
 
 Features: User Registration and Authentication , Search and Filter 
 
-deployed link : https://vite-project-yashbodhe2004-yashbodhe2004s-projects.vercel.app?_vercel_share=IBqTvK77jKggxv2NGVHidNpdT90jLNyU 
+deployed link : https://vite-project-yashbodhe2004-yashbodhe2004s-projects.vercel.app?_vercel_share=IBqTvK77jKggxv2NGVHidNpdT90jLNyU (backend)
+
+deployed link : https://paws-connect-yashbodhe2004-yashbodhe2004s-projects.vercel.app  
+
+
+
+
